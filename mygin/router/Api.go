@@ -45,6 +45,8 @@ func SetupRouter() *gin.Engine {
 	//	  "manu": "123",
 	//}))
 
+
+
 	//权限认证
 	authorized := r.Group("/", gin.BasicAuth(gin.Accounts{
 		"foo":  "bar", // user:foo password:bar
