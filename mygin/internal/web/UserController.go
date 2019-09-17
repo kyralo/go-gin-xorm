@@ -5,11 +5,15 @@ import (
 	"mygin/internal/service"
 )
 
-func GetAll(c *gin.Context) {
-	service.ListUsers(c)
+func GetAll() gin.HandlerFunc{
+	return func(c *gin.Context) {
+		service.ListUsers(c)
+	}
 }
 
-func GetById(c *gin.Context){
-	service.SelectUserById(c)
+func GetById() gin.HandlerFunc{
+	return func(c *gin.Context) {
+		service.SelectUserById(c)
+	}
 }
 
