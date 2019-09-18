@@ -15,20 +15,42 @@ func init() {
 
 //查询所有用户
 func ListUsers() []model.User{
-	users := new([]model.User)
-	e := engine.Find(users)
+	var users []model.User
+	e := engine.Find(&users)
 	if e != nil {
-		log.Fatalf("查询失败",e)
+		log.Println("查询失败",e)
 	}
-	return *users
+	return users
 }
 
-func SelectUserById(id int64) model.User{
-	user := new(model.User)
-	_,e := engine.ID(id).Get(user)
+func SelectUserById(id string) model.User{
+	var user model.User
+	_,e := engine.ID(id).Get(&user)
 	if e != nil {
-		log.Fatalf("查询失败",e)
+		log.Println("查询失败",e)
 	}
-	return *user
+	return user
+}
+
+func SelectUserByWeChatId(WechatId string) model.User {
+	var user model.User
+
+	_, e := engine.Where("wechat_id = ?", WechatId).Get(&user)
+
+	if e != nil {
+		log.Println("查询失败",e)
+	}
+
+	return user
+}
+
+func Insert(user model.User) int64 {
+	i, e := engine.Insert(user)
+
+	if e != nil {
+		log.Println("新增失败",e)
+	}
+
+	return i
 }
 
