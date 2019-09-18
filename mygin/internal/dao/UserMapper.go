@@ -16,7 +16,7 @@ func init() {
 //查询所有用户
 func ListUsers() []model.User{
 	var users []model.User
-	e := engine.Find(&users)
+	e := engine.Cols("id","name","age","sex").Find(&users)
 	if e != nil {
 		log.Println("查询失败",e)
 	}
